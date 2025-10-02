@@ -1,39 +1,21 @@
-# LegendarySpawnDiscord (for Arclight + NeoForge 1.21.1 + Pixelmon 9.3.x)
+# LegendarySpawnDiscord (1.3.0)
 
-전설 포켓몬이 스폰될 때, 디스코드 채널로 알림을 보내는 **독립 플러그인**입니다.
-- Pixelmon 코드에 직접 의존하지 않고 **리플렉션**으로 이벤트를 처리하므로, GitHub Actions에서도 빌드가 됩니다.
-- NeoForge `EVENT_BUS` 에 **리플렉션**으로 등록하고, `@SubscribeEvent`(bus 라이브러리)만 컴파일 타임에 사용합니다.
-- 디스코드 전송은 **JDA 5**를 **리로케이션(shade)** 해서 다른 플러그인과 충돌을 피합니다.
+Pixelmon 9.3.9 (MC 1.21.1 / NeoForge / Arclight)에서 전설 포켓몬 스폰을 감지하여 **디스코드**로 알림을 보내는 Spigot 플러그인입니다.
 
-## 요구사항
-- **Arclight NeoForge 1.21.1**
-- **Java 21**
-- **Pixelmon Reforged 9.3.x** (서버에 설치되어 있어야 함)
+## 핵심
+- **웹훅 모드(권장)**: 디스코드 웹훅만으로 전송. JDA 종료 시 `ShutdownEvent` CNFE 회피.
+- **JDA 모드(선택)**: 봇 토큰/채널 ID 사용. (JDA 클래스 프리로드 + shade 리로케이션으로 충돌 최소화)
+- **NeoForge `EVENT_BUS`**에 **LegendarySpawnEvent.DoSpawn** 리스너 등록. 실패 시 **로그 패턴 감시**로 폴백.
 
 ## 설치
-1. `config.yml`의 `discord.token`, `discord.channel_id` 채우기
-2. `mvn -q -U -e -B -DskipTests package`
-3. `target/LegendarySpawnDiscord-1.0.0.jar` 를 서버 `plugins/`에 넣고 서버 실행
+1. `mvn -U -B -DskipTests package` → `target/LegendarySpawnDiscord-1.3.0.jar` 생성.
+2. JAR을 `plugins/`에 넣고 서버 실행.
+3. 생성된 `plugins/LegendarySpawnDiscord/config.yml` 편집:
+   - 웹훅 사용(추천): `discord.webhook_url` 입력.
+   - 봇 사용: `discord.token`, `discord.channel_id` 입력(권한: 메시지/임베드).
 
-## 설정 (plugins/LegendarySpawnDiscord/config.yml)
-```yaml
-discord:
-  token: "봇 토큰"
-  channel_id: "채널 ID"
-  mention_everyone: false
-  mention_role_id: ""
+## 호환성
+- Java 21 필요. 최소 NeoForge 버전 21.1.200 권장 (Pixelmon 1.21.1 요구사항 기준).
 
-message:
-  template: "✨ 전설 포켓몬 스폰! **{name}** (#{dex}) — 월드 {dimension}, 바이옴 {biome}, 좌표 {x} {y} {z}{near}"
-  include_biome: true
-  include_coords: true
-  include_dimension: true
-  include_near_player: true
-  dedupe_seconds: 10
-```
-
-템플릿 키: `{name}`, `{dex}`, `{x}`, `{y}`, `{z}`, `{dimension}`, `{biome}`, `{near}`
-
-## 참고한 API 문서
-- `LegendarySpawnEvent.DoSpawn` (스폰 시점, `getLegendary()` 제공) — Reforged 1.21.1 docs
-- `SpawnAction` / `SpawnLocation` / `MutableLocation` (좌표, 바이옴, 월드) — Reforged 1.21.1 docs
+## 문제 해결
+- 알림 미출력 시: Pixelmon 설치 확인 → EVENT_BUS 등록 로그 확인 → 안 되면 fallback 로그 패턴을 사용(기본 켜짐).
