@@ -1,23 +1,15 @@
-# LegendarySpawnDiscord - config.yml  (Webhook mode recommended)
-# Place this file at:  plugins/LegendarySpawnDiscord/config.yml
+# LegendarySpawnDiscord configuration
+webhook_url: ""   # <-- 여기에 디스코드 웹훅 URL을 넣으세요 (필수)
+role_mention_id: "" # 선택: 특정 역할을 핑하려면 역할 ID 입력 (예: 123456789012345678)
+debug: true
+dedupe_seconds: 60
 
-discord:
-  # ✅ Use webhook mode for stability (no bot/JDA needed)
-  webhook_url: "PASTE_YOUR_DISCORD_WEBHOOK_URL"
-  # If you use webhook mode, keep the next two empty
-  token: ""
-  channel_id: ""
+# Pixelmon 전설 스폰 콘솔 메시지 패턴 (1.21.1 / 9.3.9 기준)
+regex:
+  legendary_line: '^\[Pixelmon\] (?P<name>[A-Za-z\'\- ]+) has spawned in a (?P<biome>.+?) biome!$'
+  coords_line: '^\[Pixelmon\] Spawned (?P<name>[A-Za-z\'\- ]+) at:.* x:\s*(?P<x>-?\d+),\s*y:\s*(?P<y>-?\d+),\s*z:\s*(?P<z>-?\d+)'
 
-notify:
-  mention_everyone: false
-  mention_role_id: ""
-
-# Log fallback watcher (string -> Java regex). SAFE for YAML + Java.
-match:
-  # e.g. "[Pixelmon] Suicune has spawned in a river biome!"
-  legendary_line_regex: '^\[Pixelmon\] (?<name>[A-Za-z''\- ]+) has spawned in a (?<biome>.+?) biome!$'
-  # e.g. "Spawned Suicune at: [ world] x: 123, y: 64, z: -45"
-  coords_line_regex: '^Spawned (?<name>[A-Za-z''\- ]+) at:.* x:\s*(?<x>-?\d+),\s*y:\s*(?<y>-?\d+),\s*z:\s*(?<z>-?\d+)'
-
-# Duplicate suppression (seconds)
-dedupe_seconds: 120
+message:
+  title: "⭐ 전설 포켓몬 스폰!"
+  content: "{name} 이(가) {biome} 바이옴에 스폰! 좌표: X:{x} Y:{y} Z:{z}"
+  footer: "Pixelmon 1.21.1 • Legendary notifier"

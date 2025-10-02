@@ -1,7 +1,6 @@
 name: LegendarySpawnDiscord
-version: 1.3.0
-main: com.signition.legendary.LegendarySpawnDiscordPlugin
+main: com.signition.legendarydiscord.LegendarySpawnDiscordPlugin
+version: 1.0.0
 api-version: '1.21'
 author: signition
-website: https://reforged.gg/
-description: Send Discord notifications when Pixelmon legendary spawns (Arclight + NeoForge 1.21.1).
+description: Sends Discord webhook messages when Pixelmon legendaries spawn (log watcher)
