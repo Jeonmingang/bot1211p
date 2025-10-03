@@ -1,10 +1,10 @@
-name: build-and-upload-jar
+name: build
+
 on:
   push:
-    branches: [ main, master ]
+    branches: [ main ]
   pull_request:
-    branches: [ main, master ]
-  workflow_dispatch:
+    branches: [ main ]
 
 jobs:
   build:
@@ -13,23 +13,20 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Set up JDK 21
+      - name: Set up JDK 11 (Temurin)
         uses: actions/setup-java@v4
         with:
-          distribution: temurin
-          java-version: '21'
-          cache: maven
+          distribution: 'temurin'
+          java-version: '11'
+          cache: 'maven'
 
       - name: Build with Maven
-        run: mvn -U -B -DskipTests package
+        run: mvn -B -e -V -DskipTests package
 
-      - name: Upload shaded JAR
+      - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: LegendarySpawnDiscord
+          name: LegendAlert
           path: |
-            target/LegendarySpawnDiscord-*.jar
-            !target/*-sources.jar
-            !target/*-javadoc.jar
-          if-no-files-found: error
-          retention-days: 7
+            target/*-shaded.jar
+            target/*.jar
