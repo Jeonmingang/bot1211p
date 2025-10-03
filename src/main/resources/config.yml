@@ -3,7 +3,7 @@ webhook_url: "https://discordapp.com/api/webhooks/1423701834412855329/GvGA5fl-uC
 
 # Feature toggles
 enable_legendary_alert: true
-enable_chat_bridge: true
+enable_chat_bridge: false
 
 # Message formats
 legendary_format_discord: "{pokemon} 전설 등장 전설 떳따 {biome} 여기서 {location}**"
