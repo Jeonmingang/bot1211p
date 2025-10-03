@@ -6,8 +6,8 @@ enable_legendary_alert: true
 enable_chat_bridge: false
 
 # Message formats
-legendary_format_discord: "{pokemon} 전설 등장 전설 떳따 {biome} 여기서 {location}**"
-legendary_format_ingame: "&6[Legendary] &e{pokemon} &7spawned in &b{biome}&7 at &f{location}"
+legendary_format_discord: "[ 전설 ] {pokemon}가 등장 전설 떳따 {biome} 여기서 {location}**"
+legendary_format_ingame: "&6[ 전설 ] &e{pokemon}&7 가 &b{biome}&7 에서 출현! &f{location}"
 chat_format_discord: "[MC] {player}: {message}"
 
 # Defaults if not present in log
