@@ -1,0 +1,13 @@
+name: LegendAlert
+main: gg.legendalert.LegendAlertPlugin
+version: 1.0.1
+api-version: 1.16
+author: minkang-helper
+commands:
+  legendalert:
+    description: LegendAlert admin command
+    usage: /<command> reload|test [name]
+    permission: legendalert.admin
+permissions:
+  legendalert.admin:
+    default: op

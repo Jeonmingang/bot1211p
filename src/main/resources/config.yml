@@ -1,0 +1,103 @@
+# LegendAlert configuration
+webhook_url: ""
+
+# Feature toggles
+enable_legendary_alert: true
+enable_chat_bridge: true
+
+# Message formats
+legendary_format_discord: ":zap: **{pokemon}** spawned in **{biome}** at **{location}**"
+legendary_format_ingame: "&6[Legendary] &e{pokemon} &7spawned in &b{biome}&7 at &f{location}"
+chat_format_discord: "[MC] {player}: {message}"
+
+# Defaults if not present in log
+defaults:
+  biome: "Unknown"
+  location: "Unknown"
+
+# Regex patterns used to detect spawn messages.
+# Named groups allowed:
+#   (?P<pokemon>...), (?P<biome>...), (?P<location>...), (?P<x>...), (?P<y>...), (?P<z>...)
+# If x/y/z are captured, they are combined automatically into {location} as "x=.. y=.. z=..".
+patterns:
+  # 1) 기본 영어 Pixelmon 알림 (바이옴 포함)
+  - "(?i)\[Pixelmon\] (?P<pokemon>[A-Za-z\-\.\s]+) has spawned in a (?P<biome>[A-Za-z\-\s]+) biome!?"
+  # 2) 'near <player>' 형태를 위치로 사용
+  - "(?i)\[Pixelmon\] (?P<pokemon>[A-Za-z\-\.\s]+) has spawned in a (?P<biome>[A-Za-z\-\s]+) biome!? near (?P<location>[A-Za-z0-9_]+)"
+  # 3) 좌표 로그 (BlockPos{x=..,y=..,z=..}) 혹은 비슷한 형식
+  - "(?i)Spawned\s+(?P<pokemon>[A-Za-z\-\.\s]+)\s+at:\s*.*?x[=:]\s*(?P<x>-?\d+).*?y[=:]\s*(?P<y>-?\d+).*?z[=:]\s*(?P<z>-?\d+)"
+  # 4) 좌표가 괄호로 표기되는 변종 (x: 123, y: 70, z: -456)
+  - "(?i)(?P<pokemon>[A-Za-z\-\.\s]+)\s+spawn(?:ed)?\s+.*?\(x[:=]\s*(?P<x>-?\d+)\s*,\s*y[:=]\s*(?P<y>-?\d+)\s*,\s*z[:=]\s*(?P<z>-?\d+)\)"
+
+# Legendary fallback list (used if 패턴에서 포켓몬 이름만 감지됨)
+legendary_names:
+  - Articuno
+  - Zapdos
+  - Moltres
+  - Mewtwo
+  - Mew
+  - Raikou
+  - Entei
+  - Suicune
+  - Lugia
+  - Ho-Oh
+  - Celebi
+  - Regirock
+  - Regice
+  - Registeel
+  - Latias
+  - Latios
+  - Kyogre
+  - Groudon
+  - Rayquaza
+  - Jirachi
+  - Deoxys
+  - Uxie
+  - Mesprit
+  - Azelf
+  - Dialga
+  - Palkia
+  - Heatran
+  - Regigigas
+  - Giratina
+  - Cresselia
+  - Manaphy
+  - Darkrai
+  - Shaymin
+  - Arceus
+  - Victini
+  - Cobalion
+  - Terrakion
+  - Virizion
+  - Tornadus
+  - Thundurus
+  - Reshiram
+  - Zekrom
+  - Landorus
+  - Kyurem
+  - Keldeo
+  - Xerneas
+  - Yveltal
+  - Zygarde
+  - Diancie
+  - Hoopa
+  - Volcanion
+  - Tapu Koko
+  - Tapu Lele
+  - Tapu Bulu
+  - Tapu Fini
+  - Cosmog
+  - Cosmoem
+  - Solgaleo
+  - Lunala
+  - Necrozma
+  - Zacian
+  - Zamazenta
+  - Eternatus
+  - Kubfu
+  - Urshifu
+  - Regieleki
+  - Regidrago
+  - Glastrier
+  - Spectrier
+  - Calyrex
