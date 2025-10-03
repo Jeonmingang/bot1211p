@@ -6,7 +6,7 @@ enable_legendary_alert: true
 enable_chat_bridge: true
 
 # Message formats
-legendary_format_discord: ":zap: **{pokemon}** spawned in **{biome}** at **{location}**"
+legendary_format_discord: "{pokemon} 전설 등장 전설 떳따 {biome} 여기서 {location}**"
 legendary_format_ingame: "&6[Legendary] &e{pokemon} &7spawned in &b{biome}&7 at &f{location}"
 chat_format_discord: "[MC] {player}: {message}"
 
