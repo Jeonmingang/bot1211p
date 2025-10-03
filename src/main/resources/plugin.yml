@@ -1,6 +1,0 @@
-name: LegendarySpawnDiscord
-main: com.signition.legendarydiscord.LegendarySpawnDiscordPlugin
-version: 1.0.0
-api-version: '1.21'
-author: signition
-description: Sends Discord webhook messages when Pixelmon legendaries spawn (log watcher)
