@@ -1,5 +1,5 @@
 # LegendAlert configuration
-webhook_url: ""
+webhook_url: "https://discordapp.com/api/webhooks/1423701834412855329/GvGA5fl-uCXZgbJkM0Tk3LRMVuej9S6P4cfrZKRw_YdXCCpSOv1emT9ovo1UxQJR-IZ9"
 
 # Feature toggles
 enable_legendary_alert: true
